@@ -6,16 +6,18 @@ function task(title) {
     this.title = title;
 };
 
-function addTaskList () {
-    let newTask = document.createElement("li");
-    // take the last task, i.e. the latest addition
-    newTask.textContent = tasks.at(-1).title;
-    taskList.appendChild(newTask);
+// this clears and re-generates the whole list based on the array "tasks"
+function updateTaskList () {
+    taskList.innerHTML = "";
+    for (let task of tasks) {
+        let newTask = document.createElement("li");
+        newTask.textContent = task.title;
+        taskList.appendChild(newTask);
+    };
 };
 
 addTaskForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    
     let input = addTaskForm.querySelector("input[type='text']");
     // check that the input isn't empty before adding a task
     if (input != "") { 
@@ -23,7 +25,7 @@ addTaskForm.addEventListener("submit", (event) => {
         let newTask = new task(input.value); 
         // add the task to the tasks list
         tasks.push(newTask)
-        addTaskList();
+        updateTaskList();
     };
     // reset the form so that it's empty
     addTaskForm.reset();
