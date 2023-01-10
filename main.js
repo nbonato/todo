@@ -46,6 +46,24 @@ addTaskForm.addEventListener("submit", (event) => {
 });
 
 
+document.addEventListener("click", (event) => {
+    let target = event.target.parentNode.parentNode;
+    if(target == addTaskForm) {
+        let hidden = addTaskForm.querySelectorAll(".hidden");
+        for (let element of hidden) {
+            element.style.display = "inline";
+        };    
+    } else {
+        let hidden = addTaskForm.querySelectorAll(".hidden");
+        for (let element of hidden) {
+            element.style.display = "none";
+        };        
+    };
+
+});
+
+
+
 
 
 

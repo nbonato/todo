@@ -49,3 +49,7 @@ input {
 #task-list li:hover .delete-button {
     visibility: visible;
 }
+
+.hidden {
+    display: none;
+}
