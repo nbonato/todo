@@ -17,8 +17,30 @@
         </div>
         <div>
             <form  id="new-task">
-                <label for="task-input">Add task</label>
-                <input type="text" name="task-input" id="task-input">
+                <div class="form-input">
+                    <label for="task-input">Add task</label>
+                    <input type="text" name="task-input" id="task-input">
+                </div>
+
+                <div class="form-input hidden">
+                    <label for="date-input">Due date</label>
+                    <input type="date" name="date-input" id="date-input">
+                </div>
+
+                <div class="form-input hidden">
+                    <label for="type-choice">Choose a type:</label>
+                    <input list="todo-types" id="type-choice" name="type-choice">
+                    <datalist id="todo-types">
+                        <option value="Lettura">
+                        <option value="Libro">
+                        <option value="Video">
+                        <option value="Sito">
+                        <option value="Film">
+                    </datalist>
+                </div>
+                <button type="submit" class="hidden">
+                    Invia
+                </button>
             </form>
             <ul id="task-list"></ul>
         </div>
