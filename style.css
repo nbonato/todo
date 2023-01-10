@@ -13,11 +13,39 @@ input {
     border: solid 1px ;
 }
 
+#task-list {
+    padding: 0;
+}
+
 #task-list li {
     list-style-type: none;
-    border: solid 1px transparent;
+    width: 50%;
+    padding: 0.1em 0.6em;
+    background-color: rgb(245, 245, 245);
+    margin: 2px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#task-list li p {
+    margin: 0;
 }
 
 #task-list li:hover {
-    border: solid 1px;
+    background-color:  rgb(236, 236, 236);
+    box-shadow: 1px 1px 6px rgb(179, 179, 179);
+}
+
+.delete-button {
+    visibility: hidden;
+}
+
+.delete-button:hover {
+    color: rgb(255, 53, 31);
+    text-shadow: 1px 1px 2px rgb(126, 126, 126);
+}
+
+#task-list li:hover .delete-button {
+    visibility: visible;
 }

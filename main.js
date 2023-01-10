@@ -1,9 +1,14 @@
 const taskList = document.getElementById("task-list");
 const addTaskForm = document.getElementById("new-task");
+
 let tasks = [];
 
 function task(title) {
     this.title = title;
+    this.delete = function() {
+        tasks.splice(tasks.indexOf(this), 1);
+        updateTaskList();
+    };
 };
 
 // this clears and re-generates the whole list based on the array "tasks"
@@ -11,7 +16,16 @@ function updateTaskList () {
     taskList.innerHTML = "";
     for (let task of tasks) {
         let newTask = document.createElement("li");
-        newTask.textContent = task.title;
+        let taskName = document.createElement("p");
+        let deleteButton = document.createElement("p");
+        deleteButton.textContent = "✖"
+        deleteButton.classList.add("delete-button");
+        deleteButton.addEventListener("click", (event) => {
+            task.delete();
+        });
+        taskName.textContent = task.title;
+        newTask.appendChild(taskName);
+        newTask.appendChild(deleteButton);
         taskList.appendChild(newTask);
     };
 };
