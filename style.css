@@ -1,3 +1,6 @@
+* {
+    --background-color: rgb(236, 236, 236);
+}
 .container {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -11,6 +14,18 @@ button {
 input {
     border-radius: 0;
     border: solid 1px ;
+}
+
+#new-task {
+    position: absolute;
+    background-color: var(--background-color);
+    padding: 0.7em;
+}
+
+/* The point of this is to push the list of tasks down
+and make it so it's overlapped only by the expanded form */
+.placeholder {
+    padding: 0.7em;
 }
 
 #task-list {
@@ -33,7 +48,7 @@ input {
 }
 
 #task-list li:hover {
-    background-color:  rgb(236, 236, 236);
+    background-color: var(--background-color);
     box-shadow: 1px 1px 6px rgb(179, 179, 179);
 }
 

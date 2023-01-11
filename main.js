@@ -51,7 +51,7 @@ document.addEventListener("click", (event) => {
     if(target == addTaskForm) {
         let hidden = addTaskForm.querySelectorAll(".hidden");
         for (let element of hidden) {
-            element.style.display = "inline";
+            element.style.display = "block";
         };    
     } else {
         let hidden = addTaskForm.querySelectorAll(".hidden");
