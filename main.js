@@ -6,6 +6,8 @@ function taskCreator(title, dueDate, type) {
     this.title = title;
     this.delete = function() {
         tasks.splice(tasks.indexOf(this), 1);
+        console.log(types, types.indexOf(this.type));
+        types.splice(types.indexOf(this.type), 1);
         updateTaskList();
     };
     this.dueDate = dueDate;
@@ -14,6 +16,9 @@ function taskCreator(title, dueDate, type) {
 
 
 let tasks = [];
+let types = [];
+
+
 if (localStorage.getItem('tasks')) {
     tasksStored = JSON.parse(localStorage.getItem("tasks") || "[]");
     for (let element of tasksStored) {
@@ -22,6 +27,13 @@ if (localStorage.getItem('tasks')) {
     updateTaskList();
 };
   
+
+
+if (localStorage.getItem('types')) {
+    types = JSON.parse(localStorage.getItem("types") || "[]");
+};
+
+
 
 // this clears and re-generates the whole list based on the array "tasks"
 function updateTaskList () {
@@ -50,6 +62,7 @@ function updateTaskList () {
         deleteButton.classList.add("delete-button");
         deleteButton.addEventListener("click", (event) => {
             task.delete();
+        
         });
         taskName.textContent = task.title;
         newTask.appendChild(taskBasic);
@@ -65,6 +78,7 @@ function updateTaskList () {
         taskList.appendChild(newTask);
     };
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("types", JSON.stringify(types));
 };
 
 addTaskForm.addEventListener("submit", (event) => {
@@ -78,7 +92,15 @@ addTaskForm.addEventListener("submit", (event) => {
         // use the input as the task values
         let newTask = new taskCreator(title, dueDate, type);
         // add the task to the tasks list
-        tasks.push(newTask)
+        tasks.push(newTask);
+
+        // check if the task's type is already in use
+        // if not, add it to the types array
+        
+        if (!types.includes(type)) {
+            types.push(type);
+        };
+
         updateTaskList();
     } else {
         alert("No name!");
