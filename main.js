@@ -1,9 +1,8 @@
 const taskList = document.getElementById("task-list");
 const addTaskForm = document.getElementById("new-task");
 
-let tasks = [];
-
-function task(title, dueDate, type) {
+ 
+function taskCreator(title, dueDate, type) {
     this.title = title;
     this.delete = function() {
         tasks.splice(tasks.indexOf(this), 1);
@@ -12,6 +11,17 @@ function task(title, dueDate, type) {
     this.dueDate = dueDate;
     this.type = type;
 };
+
+
+let tasks = [];
+if (localStorage.getItem('tasks')) {
+    tasksStored = JSON.parse(localStorage.getItem("tasks") || "[]");
+    for (let element of tasksStored) {
+        tasks.push(new taskCreator(element.title, element.dueDate, element.type));
+    };
+    updateTaskList();
+};
+  
 
 // this clears and re-generates the whole list based on the array "tasks"
 function updateTaskList () {
@@ -54,6 +64,7 @@ function updateTaskList () {
         });
         taskList.appendChild(newTask);
     };
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
 addTaskForm.addEventListener("submit", (event) => {
@@ -65,7 +76,7 @@ addTaskForm.addEventListener("submit", (event) => {
     // check that the input isn't empty before adding a task
     if (title != "") { 
         // use the input as the task values
-        let newTask = new task(title, dueDate, type);
+        let newTask = new taskCreator(title, dueDate, type);
         // add the task to the tasks list
         tasks.push(newTask)
         updateTaskList();
